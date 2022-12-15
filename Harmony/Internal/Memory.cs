@@ -1,3 +1,4 @@
+using MonoMod.Core.Platforms;
 using MonoMod.RuntimeDetour;
 using MonoMod.Utils;
 using System;
@@ -110,14 +111,15 @@ namespace HarmonyLib
 		///
 		public static string WriteJump(long memory, long destination)
 		{
-			//new NativeHook()
 			// TODO jpboivin
-			//var data = DetourHelper.Native.Create((IntPtr)memory, (IntPtr)destination);
+			var detour = PlatformTriple.Current.CreateNativeDetour((IntPtr)memory, (IntPtr)destination);
+
 			//DetourHelper.Native.MakeWritable(data);
 			//DetourHelper.Native.Apply(data);
 			//DetourHelper.Native.MakeExecutable(data);
 			//DetourHelper.Native.FlushICache(data);
 			//DetourHelper.Native.Free(data);
+			
 			return null;
 		}
 
