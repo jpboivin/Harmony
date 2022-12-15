@@ -1,4 +1,5 @@
 using Mono.Cecil;
+using MonoMod.Core.Platforms;
 using MonoMod.RuntimeDetour;
 using MonoMod.Utils;
 using System;
@@ -42,7 +43,7 @@ namespace HarmonyLib
 		// maps the native start of the method to the method itself
 		static readonly Dictionary<long, MethodInfo> methodStarts;
 		static bool methodStartsInvalidated;
-		
+
 		internal static readonly int actualVersion;
 
 		static HarmonySharedState()
@@ -79,7 +80,7 @@ namespace HarmonyLib
 			RefreshMethodStarts();
 
 			// newer .NET versions can re-jit methods so we need to patch them after that happens
-			DetourHelper.Runtime.OnMethodCompiled += (MethodBase method, IntPtr codeStart, ulong codeLen) =>
+			PlatformTriple.Current.Runtime.OnMethodCompiled += (RuntimeMethodHandle methodHandle, MethodBase method, IntPtr codeStart, IntPtr codeRw, ulong codeSize) =>
 			{
 				if (method == null) return;
 				var info = GetPatchInfo(method);
@@ -88,7 +89,7 @@ namespace HarmonyLib
 				methodStartsInvalidated = true;
 			};
 		}
-		
+
 		private static void RefreshMethodStarts() {
 			lock (originals) {
 				methodStarts.Clear();
@@ -170,7 +171,7 @@ namespace HarmonyLib
 			}
 			else
 			{
-				var baseMethod = DetourHelper.Runtime.GetIdentifiable(frameMethod);
+				var baseMethod = PlatformTriple.Current.Runtime.GetIdentifiable(frameMethod);
 				methodStart = baseMethod.GetNativeStart().ToInt64();
 			}
 
@@ -182,9 +183,9 @@ namespace HarmonyLib
 				if (methodStartsInvalidated) {
 					RefreshMethodStarts();
 				}
-				
-				return methodStarts.TryGetValue(methodStart, out var originalMethod) 
-					? originalMethod 
+
+				return methodStarts.TryGetValue(methodStart, out var originalMethod)
+					? originalMethod
 					: frameMethod;
 			}
 		}

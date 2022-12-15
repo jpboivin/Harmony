@@ -52,7 +52,7 @@ namespace HarmonyLib
 				if (string.IsNullOrEmpty(location)) location = new Uri(assembly.CodeBase).LocalPath;
 #endif
 				var ptr_runtime = IntPtr.Size;
-				var ptr_env = PlatformHelper.Current;
+				var ptr_env = IntPtr.Zero; // TODO jpboivin find equivalent
 				FileLog.Log($"### Harmony id={id}, version={version}, location={location}, env/clr={environment}, platform={platform}, ptrsize:runtime/env={ptr_runtime}/{ptr_env}");
 				var callingMethod = AccessTools.GetOutsideCaller();
 				if (callingMethod.DeclaringType is object)

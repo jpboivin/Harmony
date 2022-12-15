@@ -33,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MonoMod.Common" Version="$(MonoModCommonVersion)" />
+		<PackageReference Include="MonoModReorg.RuntimeDetour" Version="$(MonoModRunetimeDetourVersion)" />
 	</ItemGroup>
 
 </Project>

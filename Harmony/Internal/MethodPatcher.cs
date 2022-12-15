@@ -265,7 +265,8 @@ namespace HarmonyLib
 				parameterTypes.ToArray()
 			)
 			{
-				OwnerType = original.DeclaringType
+				// TODO jpboivin unsettable
+				//OwnerType = original.DeclaringType
 			};
 
 			var offset = (original.IsStatic ? 0 : 1) + (useStructReturnBuffer ? 1 : 0);
@@ -480,10 +481,10 @@ namespace HarmonyLib
 					else
 					{
 						var paramType = patchParam.ParameterType;
-						
+
 						var parameterIsRef = paramType.IsByRef;
 						var parameterIsObject = paramType == typeof(object) || paramType == typeof(object).MakeByRefType();
-						
+
 						if (AccessTools.IsStruct(originalType))
 						{
 							if (parameterIsObject)

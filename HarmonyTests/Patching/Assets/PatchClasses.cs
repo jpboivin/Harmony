@@ -1,4 +1,3 @@
-extern alias mmc;
 using HarmonyLib;
 using System;
 using System.Collections;
@@ -588,7 +587,7 @@ namespace HarmonyLibTests.Assets
 #else
 		public static MethodInfo Prefix(MethodBase method)
 		{
-			var dynamicMethod = new mmc::MonoMod.Utils.DynamicMethodDefinition(method.Name + "_Class11Patch_Prefix",
+			var dynamicMethod = new MonoMod.Utils.DynamicMethodDefinition(method.Name + "_Class11Patch_Prefix",
 				typeof(bool),
 				new[] { typeof(string).MakeByRefType(), typeof(int) });
 

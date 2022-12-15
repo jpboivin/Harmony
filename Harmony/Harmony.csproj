@@ -116,7 +116,7 @@
 
 	<ItemGroup>
 		<!-- https://dev.azure.com/MonoMod/MonoMod/_packaging?_a=feed&feed=DevBuilds -->
-		<PackageReference Include="MonoMod.Common" Version="$(MonoModCommonVersion)">
+		<PackageReference Include="MonoModReorg.RuntimeDetour" Version="$(MonoModRunetimeDetourVersion)">
 			<PrivateAssets Condition="$(ILRepackInternalize)">all</PrivateAssets>
 		</PackageReference>
 

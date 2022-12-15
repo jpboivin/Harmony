@@ -1511,7 +1511,8 @@ namespace HarmonyLib
 					method.ReturnType,
 					parameterTypes)
 				{
-					OwnerType = declaringType
+					// TODO jpboivin unsettable
+					//OwnerType = declaringType
 				};
 				var ilGen = dmd.GetILGenerator();
 				if (declaringType != null && declaringType.IsValueType)
@@ -1551,7 +1552,8 @@ namespace HarmonyLib
 					delegateType,
 					new[] { typeof(object) })
 				{
-					OwnerType = delegateType
+					// TODO jpboivin unsettable
+					//OwnerType = delegateType
 				};
 				var ilGen = dmd.GetILGenerator();
 				ilGen.Emit(OpCodes.Ldarg_0);
